@@ -1,31 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import ProfileCard from './components/profilecard'
+import React, { Suspense } from 'react';
+import SmoothScrollProvider from './components/providers/SmoothScrollProvider';
+import AnimationProvider from './components/providers/AnimationProvider';
+import Navbar from './components/navigation/Navbar';
+import HeroSection from './components/hero/HeroSection';
+import MessageSection from './components/message/MessageSection';
+import TimelineSection from './components/timeline/TimelineSection';
+import SplitSection from './components/split/SplitSection';
+import HelmetGallerySection from './components/helmets/HelmetGallerySection';
+import StorePromoSection from './components/store/StorePromoSection';
+import PartnersSection from './components/partners/PartnersSection';
+import FooterSection from './components/footer/FooterSection';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <ProfileCard
-        name="Virendra Uplenchwar"
-        title="Btech student"
-        handle="vir_d_uplenchwar"
-        status="Online"
-        contactText="Contact Me"
-        showUserInfo={true}
-        enableTilt={true}
-        enableMobileTilt={false}
-        behindGlowEnabled={false}
-        onContactClick={() => console.log('Contact clicked')}
-        showIcon
-        showBehindGlow
-        customInnerGradient="linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)"
-      />
-    </> 
-  )
+    <SmoothScrollProvider>
+      <AnimationProvider>
+        <div className="bg-bg-light min-h-screen text-black font-body selection:bg-neon-lime selection:text-black">
+          <Navbar />
+
+          <main>
+            <Suspense fallback={<div className="h-screen w-full bg-bg-light flex items-center justify-center">Loading...</div>}>
+              <HeroSection />
+            </Suspense>
+
+            <MessageSection />
+            <TimelineSection />
+            <SplitSection />
+            <HelmetGallerySection />
+            <StorePromoSection />
+            <PartnersSection />
+          </main>
+
+          <FooterSection />
+        </div>
+      </AnimationProvider>
+    </SmoothScrollProvider>
+  );
 }
 
-export default App
+export default App;
